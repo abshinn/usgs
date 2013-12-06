@@ -1,4 +1,3 @@
-usgsAPI
-=======
+USGS Earthquake API Python3 Wrapper
 
-Simple python wrapper for the USGS Earthquake API, written in python3.
+See usgs.APIquery docstring for usage information.
