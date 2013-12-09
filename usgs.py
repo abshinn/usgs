@@ -76,7 +76,8 @@ class APIquery(object):
                       "maxsig": "",
                  "producttype": ""}
 
-    def __init__(self, **params):
+    def __init__(self, filename = "", **params):
+        self.filename = filename
         for param in params.keys():
             if param in self.parameters.keys():
                 self.parameters[param] = params[param]
@@ -104,16 +105,30 @@ class APIquery(object):
 
     def writeResult(self):
         """write result from usgs.APIquery() call to text file"""
-        filename = "usgsQuery_{}.{}".format(
-                time.strftime("%Y-%m-%d_%H%M",time.localtime()), self.parameters["format"] )
+        if self.filename:
+            filename = self.filename
+        else:
+            filename = "usgsQuery_{}.{}".format(
+                    time.strftime("%Y-%m-%d_%H%M",time.localtime()), self.parameters["format"] )
         print("Writing results to: {}".format(filename))
         with open(filename, "wb") as btxt:
             btxt.write(self.result)
 
 if __name__ == '__main__':
     print("USGS APIquery Example")
-    APIquery(starttime = "2013-01-01", endtime = "",
-             minmagnitude = "2.5",
+    # Greater San Francisco area, 1983 through 2012
+    APIquery(starttime = "1983-01-01", endtime = "2013-01-01",
+             minmagnitude = "0.1",
              latitude = "37.77", longitude = "-122.44",
              minradiuskm = "0", maxradiuskm = "200",
-             format = "geojson")
+             reviewstatus = "reviewed",
+             filename = "usgsQuery_SF_83-12.csv",
+             format = "csv")
+    # Greater Los Angeles area, 1983 through 2012
+    APIquery(starttime = "1983-01-01", endtime = "2013-01-01",
+             minmagnitude = "0.1",
+             latitude = "34.05", longitude = "-118.26",
+             minradiuskm = "0", maxradiuskm = "200",
+             reviewstatus = "reviewed",
+             filename = "usgsQuery_LA_83-12.csv",
+             format = "csv")
