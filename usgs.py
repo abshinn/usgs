@@ -7,7 +7,7 @@ class APIquery(object):
     """USGS Earthquake API Python3 Wrapper
     
     KEYWORD ARGUMENTS
-        params** -- any USGS earthquake query paramter, for a list and
+        params** -- any USGS earthquake query parameter, for a list and
                     description of parameters, visit:
                         http://comcat.cr.usgs.gov/fdsnws/event/1/
                     for the USGS API web interface, go to:

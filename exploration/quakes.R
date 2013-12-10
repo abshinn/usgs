@@ -16,9 +16,9 @@
 #   This script can be run in an interactive R session:
 #     > source("quakes.R")
 
-# run usgsAPI python script, see above for parameter specifics
+# run python script that pulls down the data, see above for parameter specifics
 # (only needs to be run once)
-#    system('cd ../ & ./usgs.py')
+#    system('./getquakes.py')
 
 # read data into data frame
     SFquakes = read.csv('usgsQuery_SF_83-12.csv', header = TRUE, stringsAsFactors = FALSE)
@@ -50,32 +50,32 @@
     quakes$Mhalfbins = cut(quakes$mag, seq(2.0,7.5,.5), right = F)
     quakes$Mwholebins = cut(quakes$mag, seq(2.0,8.0,1), right = F)
 
-# create a column with varied magnitude bins, neccesary if plotting without a log scale
+# create a column with varied magnitude bins, necessary if plotting without a log scale
     quakes$Mvariedbins = cut(quakes$mag, c(2.0,2.5,3.0,3.5,4.0,5.0,7.5), right = F)
 
 # calculate energy based on earthquake magnitude
 #     equation: E[m] = 10^(1.5*m + 4.8) # yields Energy in Joules
-#          and: one TNT exploded undground is equivalent to about 4.184e9 Joules
+#          and: one TNT exploded underground is equivalent to about 4.184e9 Joules
     quakes$Ejoules = 10^(1.5*quakes$mag + 4.8) # units of Joules
     quakes$Etnt = quakes$Ejoules/4.184e9       # units of kilotonnes, TNT
 
 # calculate distance from center of major city by converting latitude and latitude from polar coordinates
-# to cartesean, and using the distance formula
-    Rearth = (6378 + 6356)/2.0 # average polar and equitorial radii for approximate radius, units in km
+# to cartesian, and using the distance formula
+    Rearth = (6378 + 6356)/2.0 # average polar and equatorial radii for approximate radius, units in km
     latrad = 2*pi*quakes$latitude/360  # units of radians
     lonrad = 2*pi*quakes$longitude/360 # units of radians
-    xyz = cbind( Rearth*sin(latrad)*cos(lonrad), # earthquake event cartesean position Nx3 matrix
+    xyz = cbind( Rearth*sin(latrad)*cos(lonrad), # earthquake event cartesian position Nx3 matrix
                  Rearth*sin(latrad)*sin(lonrad), #   units: km
                  Rearth*cos(latrad) )
     SFrad = list("lat" = 2*pi*37.77/360, "lon" = 2*pi*-122.44/360)
-    SFxyz = cbind( Rearth*sin(SFrad$lat)*cos(SFrad$lon), # San Francisco cartesean coordinates in 1x3 vector
+    SFxyz = cbind( Rearth*sin(SFrad$lat)*cos(SFrad$lon), # San Francisco cartesian coordinates in 1x3 vector
                    Rearth*sin(SFrad$lat)*sin(SFrad$lon), #   units: km
                    Rearth*cos(SFrad$lat) )
     # prepare SFxyz as Nx3 martix for matrix arithmetic, where N = number of SF events
     SFxyz = matrix(SFxyz, nrow = nrow(quakes[quakes$area == "SF",]), ncol = 3, byrow = TRUE)
     SFdiff = (xyz[quakes$area == "SF",] - SFxyz)
     LArad = list("lat" = 2*pi*34.05/360, "lon" = 2*pi*-118.26/360)
-    LAxyz = cbind( Rearth*sin(LArad$lat)*cos(LArad$lon), # Los Angeles cartesean coordinates in 1x3 vector
+    LAxyz = cbind( Rearth*sin(LArad$lat)*cos(LArad$lon), # Los Angeles cartesian coordinates in 1x3 vector
                    Rearth*sin(LArad$lat)*sin(LArad$lon), #   units: km
                    Rearth*cos(LArad$lat) )
     # prepare LAxyz as Nx3 martix for matrix arithmetic, where N = number of LA events
@@ -85,9 +85,12 @@
     quakes$dist[quakes$area == "SF"] = sqrt(apply(SFdiff*SFdiff, 1, sum))
     quakes$dist[quakes$area == "LA"] = sqrt(apply(LAdiff*LAdiff, 1, sum))
 
+
 # TODO
 # try doing same calculation by calculating the arc between the two lat/lon coordinates
-
+    #SFdeg = c(37.77, -122.44)
+    #SFcoord = list(deg = SFdeg, rad = 2*pi*SFdeg/360)
+    #degdiff = 
 
 
 #
@@ -235,7 +238,7 @@
     dev.off()
     # Discussion:
     #    Initially, I expected distance to be random, but that is not the case for major events
-    #    becuase aftershocks happen near to the major event. The major earthquakes that pop out 
+    #    because aftershocks happen near to the major event. The major earthquakes that pop out 
     #    in this plot are, of course, those that were discussed previously: Landers in 1992, Loma
     #    Prieta in 1989, and Northridge at the beginning of 1994. What's also interesting is the
     #    amount of aftershocks and related earthquakes for the major Los Angeles area earthquakes.
@@ -281,7 +284,7 @@
     print(magVfreq)
     dev.off()
     # Discussion:
-    #    Not suprisingly, the correlation between magnitude and frequency for most of the richter
+    #    Not surprisingly, the correlation between magnitude and frequency for most of the richter
     #    scale has a slope of about 10^1 events over one order of magnitude. Also, as expected, when
     #    the magnitude increases, the spread of the data increases due to the insufficient amount of
     #    counts. As mentioned in the above section, I am not certain, but I believe the decreasing
