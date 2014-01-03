@@ -88,9 +88,10 @@
 
 # TODO
 # try doing same calculation by calculating the arc between the two lat/lon coordinates
-    #SFdeg = c(37.77, -122.44)
-    #SFcoord = list(deg = SFdeg, rad = 2*pi*SFdeg/360)
-    #degdiff = 
+    SFdeg = c(37.77, -122.44)
+    SFcoord = list(deg = SFdeg, rad = 2*pi*SFdeg/360)
+    SFdegM = matrix(SFcoord$rad, nrow = nrow(quakes[quakes$area == "SF",]), ncol = 2, byrow = TRUE)
+    #SFdegdiff = ([quakes$area == "SF",] - SFxyz)
 
 
 #
@@ -223,7 +224,7 @@
     library("scales")
 
     # time vs. magnitude
-    tiff("SF-LA_timeVmag.tiff", width = 900, height = 700)
+    jpeg("SF-LA_timeVmag.jpeg", quality = 95, width = 600, height = 500)
     timeVmag = ggplot(na.omit(quakes), aes(ptime, mag)) +
                geom_point(aes(size = mag, color = dist)) +
                ggtitle("SF and LA Earthquakes, 1983-2012") +
@@ -246,7 +247,7 @@
     #    2 to 2.5 magnitude earthquakes in recent years.
                
     #  binned year vs. event count
-    tiff("SF-LA_yrVcount.tiff", width = 900, height = 700)
+    jpeg("SF-LA_yrVcount.jpeg", quality = 95, width = 600, height = 500)
     yrVcount = ggplot(na.omit(quakes), aes(yearbins)) +
                geom_bar(aes(fill = Mvariedbins), color = "black") +
                ggtitle("SF and LA Earthquakes, 1983-2012") +
@@ -271,7 +272,7 @@
     freq = as.data.frame(table(quakes[quakes$mag >= 2.0,c("area","mag")]))
     freq = freq[order(freq$area),]
     freq[freq$Freq == 0.0,] = NA # bins with zero counts cause log plot issues
-    tiff("SF-LA_magVfreq.tiff", width = 900, height = 700)
+    jpeg("SF-LA_magVfreq.jpeg", quality = 95, width = 600, height = 500)
     magVfreq = ggplot(na.omit(freq), aes(mag, Freq)) +
                geom_point(aes(color = area)) + 
                ggtitle("SF and LA Earthquakes, 1983-2012") + 
