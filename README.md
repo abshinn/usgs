@@ -1,5 +1,5 @@
-usgsAPI
-=======
+usgs
+====
 
 
 ### USGS Earthquake API Python3 Wrapper
