@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3 -B -tt
 
 import urllib.request, urllib.parse, time
-#import pdb # DEBUG
+
 
 class APIquery(object):
     """USGS Earthquake API Python3 Wrapper
@@ -26,9 +26,6 @@ class APIquery(object):
                       latitude = "37.77", longitude = "-122.44",
                       minradiuskm = "0", maxradiuskm = "200",
                       format = "geojson")
-
-    MODIFICATION
-        Created by Adam Shinn, November 2013
     """
 
     parameters = { "starttime": "",
@@ -76,13 +73,14 @@ class APIquery(object):
                       "maxsig": "",
                  "producttype": ""}
 
-    def __init__(self, filename = "", **params):
+    def __init__(self, filename="", **params):
+
         self.filename = filename
         for param in params.keys():
             if param in self.parameters.keys():
                 self.parameters[param] = params[param]
             else:
-                raise KeyError(param)
+                raise KeyError("{} is not a USGS api parameter".format(param))
         self.result = self.query()
         if self.parameters["format"] == "csv" or self.parameters["format"] == "text":
             self.writeResult()
@@ -91,31 +89,36 @@ class APIquery(object):
 
     def query(self):
         """query USGS API at: http://comcat.cr.usgs.gov/fdsnws/event/1/query?"""
+
         url = "http://comcat.cr.usgs.gov/fdsnws/event/1/query?{}&".format(
-                urllib.parse.urlencode(self.parameters,safe = "+:") )
+                urllib.parse.urlencode(self.parameters, safe="+:") )
         print("Querying USGS with: {}".format(url))
         with urllib.request.urlopen(url) as usgs:
-            response = usgs.read() # binary string
+            response = usgs.read()
         return response
 
     def returnResult(self):
         """return result from usgs.APIquery() call"""
+
         print("Returned in {} format, string of length {}".format(self.parameters["format"], len(self.result)))
         return self.result
 
     def writeResult(self):
         """write result from usgs.APIquery() call to text file"""
+
         if self.filename:
             filename = self.filename
         else:
             filename = "usgsQuery_{}.{}".format(
-                    time.strftime("%Y-%m-%d_%H%M",time.localtime()), self.parameters["format"] )
+                    time.strftime("%Y-%m-%d_%H%M", time.localtime()), self.parameters["format"] )
         print("Writing results to: {}".format(filename))
         with open(filename, "wb") as btxt:
             btxt.write(self.result)
 
+
 if __name__ == '__main__':
     print("USGS APIquery Example")
+
     # Greater San Francisco area, 1983 through 2012
     APIquery(starttime = "1983-01-01", endtime = "2013-01-01",
              minmagnitude = "0.1",
@@ -124,6 +127,7 @@ if __name__ == '__main__':
              reviewstatus = "reviewed",
              filename = "usgsQuery_SF_83-12.csv",
              format = "csv")
+
     # Greater Los Angeles area, 1983 through 2012
     APIquery(starttime = "1983-01-01", endtime = "2013-01-01",
              minmagnitude = "0.1",
