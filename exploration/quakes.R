@@ -224,7 +224,7 @@
     library("scales")
 
     # time vs. magnitude
-    jpeg("SF-LA_timeVmag.jpeg", quality = 95, width = 600, height = 500)
+    png("SF-LA_timeVmag.png", width = 1000, height = 800)
     timeVmag = ggplot(na.omit(quakes), aes(ptime, mag)) +
                geom_point(aes(size = mag, color = dist)) +
                ggtitle("SF and LA Earthquakes, 1983-2012") +
@@ -234,6 +234,7 @@
                guides(color = guide_legend(title = "distance [km]")) +
                scale_color_gradient(low = "red", high = "dark gray") +
                theme_grey(base_size = 12) +
+               theme(text = element_text(size = 22)) +
                facet_wrap(~ area, ncol = 1)
     print(timeVmag)
     dev.off()
@@ -247,7 +248,7 @@
     #    2 to 2.5 magnitude earthquakes in recent years.
                
     #  binned year vs. event count
-    jpeg("SF-LA_yrVcount.jpeg", quality = 95, width = 600, height = 500)
+    png("SF-LA_yrVcount.png", width = 1000, height = 800)
     yrVcount = ggplot(na.omit(quakes), aes(yearbins)) +
                geom_bar(aes(fill = Mvariedbins), color = "black") +
                ggtitle("SF and LA Earthquakes, 1983-2012") +
@@ -259,6 +260,7 @@
                scale_fill_brewer(palette = 'BuPu') + 
                scale_x_discrete("year", breaks = c(as.character(seq(1985,2010,5)))) +
                theme_grey(base_size = 12) +
+               theme(text = element_text(size = 22)) +
                facet_wrap(~ area, ncol = 1)
     print(yrVcount)
     dev.off()
@@ -272,16 +274,17 @@
     freq = as.data.frame(table(quakes[quakes$mag >= 2.0,c("area","mag")]))
     freq = freq[order(freq$area),]
     freq[freq$Freq == 0.0,] = NA # bins with zero counts cause log plot issues
-    jpeg("SF-LA_magVfreq.jpeg", quality = 95, width = 600, height = 500)
+    png("SF-LA_magVfreq.png", width = 1000, height = 800)
     magVfreq = ggplot(na.omit(freq), aes(mag, Freq)) +
-               geom_point(aes(color = area)) + 
+               geom_point(aes(color = area), size = 4) + 
                ggtitle("SF and LA Earthquakes, 1983-2012") + 
                ylab("frequency [event count per 31 years]") + 
                scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
                              labels = trans_format("log10", math_format(10^.x))) +
                scale_x_discrete("magnitude", breaks = seq(2,7.5,.5)) + 
                geom_smooth(method = "loess", aes(group = 1), color = "black") +
-               theme_grey(base_size = 12)
+               theme_grey(base_size = 12) + 
+               theme(text = element_text(size = 22))
     print(magVfreq)
     dev.off()
     # Discussion:
