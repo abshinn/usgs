@@ -116,7 +116,7 @@ class APIquery(object):
             btxt.write(self.result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print("USGS APIquery Example")
 
     # Greater San Francisco area, 1983 through 2012
