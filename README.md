@@ -17,5 +17,5 @@ usgs.APIquery(starttime = "2013-01-01", endtime = "",
               format = "geojson")
 ```
 
-USGS Earthquake Data Exploration
+### USGS Earthquake Data Exploration
 - See exploration/quakes.R for an example of USGS data exploration using R. 
