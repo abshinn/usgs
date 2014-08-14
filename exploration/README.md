@@ -68,7 +68,7 @@ quakes$Mvariedbins = cut(quakes$mag, c(2.0,2.5,3.0,3.5,4.0,5.0,7.5), right = F)
 
 One way to comprehend the destructive force of earthquakes is to convert from earthquake magnitude to a more imaginative unit of energy: the ton of TNT. To do this conversion, we need to be able to convert from magnitude to energy, perhaps with the help of Beno and Charles. Also, it is useful to know that one ton of TNT is equivalent to about 4.184e9 Joules.
 
-The (Gutenberg and Richter)[https://www2.bc.edu/john-ebel/GutenberRichterMagnitude.pdf] energy-magnitude relation (in Joules):
+The [Gutenberg and Richter](https://www2.bc.edu/john-ebel/GutenberRichterMagnitude.pdf) energy-magnitude relation (in Joules):
 
   __E[M] = 10^(1.5*M + 4.8)__
 
