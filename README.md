@@ -18,4 +18,5 @@ usgs.APIquery(starttime = "2013-01-01", endtime = "",
 ```
 
 ### USGS Earthquake Data Exploration
-- See exploration/quakes.R for an example of USGS data exploration using R. 
+
+- See [exploration](https://github.com/abshinn/usgs/tree/master/exploration) for an example of USGS data exploration with R. 
