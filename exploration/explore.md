@@ -43,7 +43,7 @@ quakes = rbind(SFquakes, LAquakes)
 
 ## Data scrubbing
 
-```
+```R
 # remove columns with all NA values
 quakes = quakes[,-7:-10]
 
@@ -72,14 +72,14 @@ The (Gutenberg and Richter)[https://www2.bc.edu/john-ebel/GutenberRichterMagnitu
 
   __E[M] = 10^(1.5*M + 4.8)__
 
-```
+```R
 quakes$Ejoules = 10^(1.5*quakes$mag + 4.8) # units of Joules
 quakes$Etnt = quakes$Ejoules/4.184e9       # units of kilotonnes, TNT
 ```
 
 ## Calculate distance from epicenter to city center
 
-```
+```R
 # calculate distance from center of major city by converting latitude and latitude from polar coordinates
 # to cartesian, and using the distance formula
 Rearth = (6378 + 6356)/2.0 # average polar and equatorial radii for approximate radius, units in km
@@ -111,14 +111,14 @@ quakes$dist[quakes$area == "LA"] = sqrt(apply(LAdiff*LAdiff, 1, sum))
 
 ## What were the largest quakes?
 
-```
+```R
 quakes = quakes[order(quakes$mag, decreasing = TRUE),] # sort by magnitude
 print(quakes[quakes$mag >= 6.0,c("ptime", "mag", "area", "Etnt", "dist")])
 ```
 
 _Output (with annotation):_
 
-```
+```R
                     ptime mag area       Etnt      dist
 10599 1992-06-28 11:57:38 7.3   LA 1344028.02 108.72365 <-- Landers
 7349  1999-10-16 09:46:46 7.2   LA  951498.97 125.37017 <-- Hector Mine
@@ -133,14 +133,14 @@ The Landers earthquake had an explosive force of 1.3 megatonnes of TNT, while th
 
 ## Which major city was most affected by earthquakes?
 
-```
+```R
 # Mean distance, magnitude, and Energy in TNT
 print(aggregate(data = quakes, cbind(dist, mag, Etnt) ~ area, mean))
 ```
 
 _Output:_
 
-```
+```R
   area     dist      mag      Etnt
 1   LA  96.97176 3.104314 368.69829
 2   SF 103.93985 2.959269  84.71983
@@ -150,14 +150,14 @@ The question of which city has been more affected is more complex than this simp
 
 ## What is the combined yearly mean distance, magnitude, and energy?
 
-```
+```R
 # yearly averages
 print(aggregate(data = quakes, cbind(dist, mag, Etnt) ~ yearbins, mean))
 ```
 
 _Output:_
 
-```
+```R
     yearbins      dist      mag        Etnt
  1      1983 110.42223 3.292727    4.506520
  2      1984  91.83969 3.351741  118.236847
@@ -196,7 +196,7 @@ Due to the exponential nature of the data, the Etnt column seems to be an excell
 
 ## What is the magnitude-frequency distribution for the two areas of interest?
 
-```
+```R
 freqSF = as.data.frame(table(quakes[quakes$area == "SF","Mhalfbins"]))
 names(freqSF) = c("magSF", "freqSF")
 freqLA = as.data.frame(table(quakes[quakes$area == "LA","Mhalfbins"]))
@@ -204,10 +204,11 @@ names(freqLA) = c("magLA", "freqLA")
 
 # event frequency
 print(cbind(freqSF, freqLA))
+```
 
 _Output:_
 
-```
+```R
      magSF freqSF   magLA freqLA
 1  [2,2.5)    476 [2,2.5)    444
 2  [2.5,3)   1838 [2.5,3)   2383
@@ -234,14 +235,14 @@ I am not an expert in seismology. However, my guess would be that this magnitude
 
 Load ggplot2, and scales packages for log tick marks.
 
-```
+```R
 library("ggplot2")
 library("scales")
 ```
 
 ## time vs. magnitude
 
-```
+```R
 png("SF-LA_timeVmag.png", width = 1000, height = 800)
 timeVmag = ggplot(na.omit(quakes), aes(ptime, mag)) +
            geom_point(aes(size = mag, color = dist)) +
@@ -266,7 +267,7 @@ Initially, I expected distance to be random, but that is not the case for major 
                
 ## binned year vs. event count
 
-```
+```R
 png("SF-LA_yrVcount.png", width = 1000, height = 800)
 yrVcount = ggplot(na.omit(quakes), aes(yearbins)) +
            geom_bar(aes(fill = Mvariedbins), color = "black") +
@@ -293,7 +294,7 @@ This is a cleaner way of looking at the magnitude size distribution per year. Th
 
 ## magnitude-frequency correlation
 
-```
+```R
 freq = as.data.frame(table(quakes[quakes$mag >= 2.0,c("area","mag")]))
 freq = freq[order(freq$area),]
 freq[freq$Freq == 0.0,] = NA # bins with zero counts cause log plot issues
