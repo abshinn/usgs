@@ -1,6 +1,6 @@
-# Major California Earthquakes with R 
+# California Earthquakes with R 
 
-## Fetching the data 
+### Fetching the data 
 
 As an example of how to use the Python USGS Earthquake API wrapper, I decided to do a bit of data exploration around major California earthquakes in the last 30 years. Specifically, I will look at all earthquakes within 200 km of San Francisco and Los Angeles.
 
@@ -41,7 +41,7 @@ LAquakes$area = "LA"
 quakes = rbind(SFquakes, LAquakes)
 ```
 
-## Data scrubbing
+### Data scrubbing
 
 ```R
 # remove columns with all NA values
@@ -64,7 +64,7 @@ quakes$Mwholebins = cut(quakes$mag, seq(2.0,8.0,1), right = F)
 quakes$Mvariedbins = cut(quakes$mag, c(2.0,2.5,3.0,3.5,4.0,5.0,7.5), right = F)
 ```
 
-## Magnitude-energy conversion
+### Magnitude-energy conversion
 
 One way to comprehend the destructive force of earthquakes is to convert from earthquake magnitude to a more imaginative unit of energy: the ton of TNT. To do this conversion, we need to be able to convert from magnitude to energy, perhaps with the help of Beno and Charles. Also, it is useful to know that one ton of TNT is equivalent to about 4.184e9 Joules.
 
@@ -77,7 +77,7 @@ quakes$Ejoules = 10^(1.5*quakes$mag + 4.8) # units of Joules
 quakes$Etnt = quakes$Ejoules/4.184e9       # units of kilotonnes, TNT
 ```
 
-## Calculate distance from epicenter to city center
+### Calculate distance from epicenter to city center
 
 ```R
 # calculate distance from center of major city by converting latitude and latitude from polar coordinates
@@ -107,16 +107,16 @@ quakes$dist[quakes$area == "SF"] = sqrt(apply(SFdiff*SFdiff, 1, sum))
 quakes$dist[quakes$area == "LA"] = sqrt(apply(LAdiff*LAdiff, 1, sum))
 ```
 
-# Questions
+## Questions
 
-## What were the largest quakes?
+### What were the largest quakes?
 
 ```R
 quakes = quakes[order(quakes$mag, decreasing = TRUE),] # sort by magnitude
 print(quakes[quakes$mag >= 6.0,c("ptime", "mag", "area", "Etnt", "dist")])
 ```
 
-_Output (with annotation):_
+*_Output (with annotation):_*
 
 ```R
                     ptime mag area       Etnt      dist
@@ -131,14 +131,14 @@ _Output (with annotation):_
 
 The Landers earthquake had an explosive force of 1.3 megatonnes of TNT, while the Loma Prieta had about 340 kilotonnes of explosive force. Interestingly, the location of these earthquakes are a huge factor to their destructive power, the Landers quake was about 109 km away in the Mojave desert and did not cause nearly as much damage to the LA metro area as the Northridge quake 22 km away, and about 4.0 (10^.6) times less powerful.
 
-## Which major city was most affected by earthquakes?
+### Which city was most affected by earthquakes?
 
 ```R
 # Mean distance, magnitude, and Energy in TNT
 print(aggregate(data = quakes, cbind(dist, mag, Etnt) ~ area, mean))
 ```
 
-_Output:_
+*_Output:_*
 
 ```R
   area     dist      mag      Etnt
@@ -148,14 +148,14 @@ _Output:_
 
 The question of which city has been more affected is more complex than this simple calculation of the 30-year mean of distance and magnitude. A better measure of how earthquakes have affected these cities would be cost of infrastructure damage. However, we can see from the data that, on average, the earthquakes surrounding LA have been about 10% closer, 1.4 (10^.15) times more severe in magnitude, and with 430% more explosive force than Bay Area earthquakes.
 
-## What is the combined yearly mean distance, magnitude, and energy?
+### What is the combined yearly mean distance, magnitude, and energy?
 
 ```R
 # yearly averages
 print(aggregate(data = quakes, cbind(dist, mag, Etnt) ~ yearbins, mean))
 ```
 
-_Output:_
+*_Output:_*
 
 ```R
     yearbins      dist      mag        Etnt
@@ -194,7 +194,7 @@ _Output:_
 Due to the exponential nature of the data, the Etnt column seems to be an excellent indicator for major events in any given year. Interestingly, the average magnitude has decreased in recent years. I imagine this may be due to an increase in detection efficiency.
 
 
-## What is the magnitude-frequency distribution for the two areas of interest?
+### What is the magnitude-frequency distribution for the two areas of interest?
 
 ```R
 freqSF = as.data.frame(table(quakes[quakes$area == "SF","Mhalfbins"]))
@@ -206,7 +206,7 @@ names(freqLA) = c("magLA", "freqLA")
 print(cbind(freqSF, freqLA))
 ```
 
-_Output:_
+*_Output:_*
 
 ```R
      magSF freqSF   magLA freqLA
@@ -227,20 +227,22 @@ Note: the units for frequency are in Event Counts per 30 years.
 
 I am not an expert in seismology. However, my guess would be that this magnitude-frequency should theoretically follow a power-law where at one end, as the magnitude approaches zero, the frequency increases exponentially, and at the other end, as the magnitude exceeds 10 the frequency diminishes to almost 0. The fact that the frequency distribution peaks between [3,3.5) and falls off as the magnitude approaches 0, given my uneducated guess, suggests that the detection efficiency (exponentially) decreases as it approaches 0. See plot magVfreq below.
 
-# Plots
+## Plots
+
+Time for some plots. Let's have a look at the following correlations:
 
 - time vs. magnitude
 - year vs. event count
 - magnitude-frequency correlation
 
-Load ggplot2, and scales packages for log tick marks.
+Load ggplot, scales for log tick marks.
 
 ```R
 library("ggplot2")
 library("scales")
 ```
 
-## time vs. magnitude
+### time vs. magnitude
 
 ```R
 png("SF-LA_timeVmag.png", width = 1000, height = 800)
@@ -259,13 +261,13 @@ print(timeVmag)
 dev.off()
 ```
 
-_Output:_
+*_Output:_*
 
 ![alt text](https://github.com/abshinn/usgs/blob/master/exploration/SF-LA_timeVmag.png "Magnitude over Time")
 
 Initially, I expected distance to be random, but that is not the case for major events because aftershocks happen near to the major event. The major earthquakes that pop out in this plot are, of course, those that were discussed previously: Landers in 1992, Loma Prieta in 1989, and Northridge at the beginning of 1994. What is also interesting is the amount of aftershocks and related earthquakes for the major Los Angeles area earthquakes. Finally, another interesting aspect of this plot is the increased detection efficiency of 2 to 2.5 magnitude earthquakes in recent years.
                
-## binned year vs. event count
+### binned year vs. event count
 
 ```R
 png("SF-LA_yrVcount.png", width = 1000, height = 800)
@@ -286,13 +288,13 @@ print(yrVcount)
 dev.off()
 ```
 
-_Output:_
+*_Output:_*
 
 ![alt text](https://github.com/abshinn/usgs/blob/master/exploration/SF-LA_yrVcount.png "Year Count")
 
 This is a cleaner way of looking at the magnitude size distribution per year. This plot also shows the increased detection efficiency for low-magnitude earthquakes in recent years. Also, it is interesting how the major LA earthquakes seemingly increased the events per year by about 10^4.
 
-## magnitude-frequency correlation
+### magnitude-frequency correlation
 
 ```R
 freq = as.data.frame(table(quakes[quakes$mag >= 2.0,c("area","mag")]))
@@ -313,7 +315,7 @@ print(magVfreq)
 dev.off()
 ```
 
-_Output:_
+*_Output:_*
 
 ![alt text](https://github.com/abshinn/usgs/blob/master/exploration/SF-LA_magVfreq.png "Magnitude versus Frequency")
 
