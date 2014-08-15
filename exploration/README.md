@@ -235,7 +235,7 @@ Time for some plots. Let's have a look at the following correlations:
 - year vs. event count
 - magnitude-frequency correlation
 
-Load ggplot, scales for log tick marks.
+Load ggplot. The "scales" package is necessary for log tick marks.
 
 ```R
 library("ggplot2")
