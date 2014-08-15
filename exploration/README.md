@@ -2,7 +2,7 @@
 
 ### Fetching the data 
 
-As an example of how to use the Python USGS Earthquake API wrapper, I decided to do a bit of data exploration around major California earthquakes in the last 30 years. Specifically, I will look at all earthquakes within 200 km of San Francisco and Los Angeles.
+As an example of how to use the Python USGS Earthquake API wrapper, I decided to do a bit of data exploration around major California earthquakes in the last 30 years. Specifically, I will look at earthquakes within 200 km of San Francisco and Los Angeles.
 
 To pull down the data using Python3, I first navigate to the usgs home directory, and call the APIquery with the desired parameters. All parameters are [defined here](http://comcat.cr.usgs.gov/fdsnws/event/1/) and an online query form can be [found here](http://earthquake.usgs.gov/earthquakes/search/).
 
@@ -70,7 +70,7 @@ One way to comprehend the destructive force of earthquakes is to convert from ea
 
 The [Gutenberg and Richter](https://www2.bc.edu/john-ebel/GutenberRichterMagnitude.pdf) energy-magnitude relation (in Joules):
 
-  __E[M] = 10^(1.5*M + 4.8)__
+> E[M] = 10^(1.5\*M + 4.8)
 
 ```R
 quakes$Ejoules = 10^(1.5*quakes$mag + 4.8) # units of Joules
@@ -146,7 +146,7 @@ print(aggregate(data = quakes, cbind(dist, mag, Etnt) ~ area, mean))
 2   SF 103.93985 2.959269  84.71983
 ```
 
-The question of which city has been more affected is more complex than this simple calculation of the 30-year mean of distance and magnitude. A better measure of how earthquakes have affected these cities would be cost of infrastructure damage. However, we can see from the data that, on average, the earthquakes surrounding LA have been about 10% closer, 1.4 (10^.15) times more severe in magnitude, and with 430% more explosive force than Bay Area earthquakes.
+The question of which city has been more affected is more complex than a simple calculation of the 30-year mean of distance and magnitude. However, on average, the earthquakes surrounding LA have been about 10% closer, 1.4 (10^.15) times more severe in magnitude, and with over 4 times more explosive force than Bay Area earthquakes.
 
 ### What is the combined yearly mean distance, magnitude, and energy?
 
@@ -191,7 +191,7 @@ print(aggregate(data = quakes, cbind(dist, mag, Etnt) ~ yearbins, mean))
  30     2012  90.10570 2.533573    1.094880
 ```
 
-Due to the exponential nature of the data, the Etnt column seems to be an excellent indicator for major events in any given year. Interestingly, the average magnitude has decreased in recent years. I imagine this may be due to an increase in detection efficiency.
+Due to the exponential nature of the data, the Etnt feature is a clear indicator for seismologically active years. Also, it appears we are seeing increased detection efficiency in the last few years with the average magnitude decreasing.
 
 
 ### What is the magnitude-frequency distribution for the two areas of interest?
@@ -265,9 +265,9 @@ dev.off()
 
 ![alt text](https://github.com/abshinn/usgs/blob/master/exploration/SF-LA_timeVmag.png "Magnitude over Time")
 
-Initially, I expected distance to be random, but that is not the case for major events because aftershocks happen near to the major event. The major earthquakes that pop out in this plot are, of course, those that were discussed previously: Landers in 1992, Loma Prieta in 1989, and Northridge at the beginning of 1994. What is also interesting is the amount of aftershocks and related earthquakes for the major Los Angeles area earthquakes. Finally, another interesting aspect of this plot is the increased detection efficiency of 2 to 2.5 magnitude earthquakes in recent years.
-               
-### binned year vs. event count
+The major earthquakes that pop out in this plot are: Landers in 1992, Loma Prieta in 1989, and Northridge at the beginning of 1994. What is also interesting is the amount of aftershocks and related earthquakes for the major Los Angeles area earthquakes. Another interesting aspect of this plot is the increased detection efficiency of 2 to 2.5 magnitude earthquakes since 2009. Perhaps this is due to the [Quake-Catcher Network (QCN)](http://qcn.stanford.edu/wp-content/uploads/2011/10/2009-Cochran_et_al_IEEE_QCN_smaller.pdf)?
+
+### year vs. event count
 
 ```R
 png("SF-LA_yrVcount.png", width = 1000, height = 800)
