@@ -70,7 +70,7 @@ One way to comprehend the destructive force of earthquakes is to convert from ea
 
 The [Gutenberg and Richter](https://www2.bc.edu/john-ebel/GutenberRichterMagnitude.pdf) energy-magnitude relation (in Joules):
 
-> E[M] = 10^(1.5\*M + 4.8)
+> *E[M] = 10^(1.5\*M + 4.8)*
 
 ```R
 quakes$Ejoules = 10^(1.5*quakes$mag + 4.8) # units of Joules
@@ -116,7 +116,7 @@ quakes = quakes[order(quakes$mag, decreasing = TRUE),] # sort by magnitude
 print(quakes[quakes$mag >= 6.0,c("ptime", "mag", "area", "Etnt", "dist")])
 ```
 
-*_Output (with annotation):_*
+**Output (with annotation):**
 
 ```R
                     ptime mag area       Etnt      dist
@@ -138,7 +138,7 @@ The Landers earthquake had an explosive force of 1.3 megatonnes of TNT, while th
 print(aggregate(data = quakes, cbind(dist, mag, Etnt) ~ area, mean))
 ```
 
-*_Output:_*
+**Output:**
 
 ```R
   area     dist      mag      Etnt
@@ -155,7 +155,7 @@ The question of which city has been more affected is more complex than a simple 
 print(aggregate(data = quakes, cbind(dist, mag, Etnt) ~ yearbins, mean))
 ```
 
-*_Output:_*
+**Output:**
 
 ```R
     yearbins      dist      mag        Etnt
@@ -206,7 +206,7 @@ names(freqLA) = c("magLA", "freqLA")
 print(cbind(freqSF, freqLA))
 ```
 
-*_Output:_*
+**Output:**
 
 ```R
      magSF freqSF   magLA freqLA
@@ -235,7 +235,7 @@ Time for some plots. Let's have a look at the following correlations:
 - year vs. event count
 - magnitude-frequency correlation
 
-Load ggplot. The "scales" package is necessary for log tick marks.
+Load ggplot2 and scales. The scales package is necessary for log tick marks.
 
 ```R
 library("ggplot2")
@@ -261,7 +261,7 @@ print(timeVmag)
 dev.off()
 ```
 
-*_Output:_*
+**Output:**
 
 ![alt text](https://github.com/abshinn/usgs/blob/master/exploration/SF-LA_timeVmag.png "Magnitude over Time")
 
@@ -288,7 +288,7 @@ print(yrVcount)
 dev.off()
 ```
 
-*_Output:_*
+**Output:**
 
 ![alt text](https://github.com/abshinn/usgs/blob/master/exploration/SF-LA_yrVcount.png "Year Count")
 
@@ -315,7 +315,7 @@ print(magVfreq)
 dev.off()
 ```
 
-*_Output:_*
+**Output:**
 
 ![alt text](https://github.com/abshinn/usgs/blob/master/exploration/SF-LA_magVfreq.png "Magnitude versus Frequency")
 
