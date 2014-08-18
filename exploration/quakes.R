@@ -61,8 +61,8 @@
 # calculate distance from center of major city by converting latitude and latitude from polar coordinates
 # to cartesian, and using the distance formula
     Rearth = (6378 + 6356)/2.0 # average polar and equatorial radii for approximate radius, units in km
-    latrad = 2*pi*quakes$latitude/360  # units of radians
-    lonrad = 2*pi*quakes$longitude/360 # units of radians
+    latrad = pi*quakes$latitude/180  # units of radians
+    lonrad = pi*quakes$longitude/180 # units of radians
     xyz = cbind( Rearth*sin(latrad)*cos(lonrad), # earthquake event cartesian position Nx3 matrix
                  Rearth*sin(latrad)*sin(lonrad), #   units: km
                  Rearth*cos(latrad) )
@@ -85,13 +85,25 @@
     quakes$dist[quakes$area == "LA"] = sqrt(apply(LAdiff*LAdiff, 1, sum))
 
 
-# TODO
-# try doing same calculation by calculating the arc between the two lat/lon coordinates
-#     SFdeg = c(37.77, -122.44)
-#     SFcoord = list(deg = SFdeg, rad = 2*pi*SFdeg/360)
-#     SFdegM = matrix(SFcoord$rad, nrow = nrow(quakes[quakes$area == "SF",]), ncol = 2, byrow = TRUE)
-#    #SFdegdiff = ([quakes$area == "SF",] - SFxyz)
+# Planar Approximation
+    Rearth = (6378 + 6356)/2.0 # average polar and equatorial radii for approximate radius, units in km
+    quakes$area_lon = 0
+    quakes$area_lon[quakes$area == "SF"] = -122.44
+    quakes$area_lon[quakes$area == "LA"] = -118.26
+    quakes$area_lat = 0
+    quakes$area_lat[quakes$area == "SF"] = 37.77
+    quakes$area_lat[quakes$area == "LA"] = 34.05
+    x = (quakes$longitude - quakes$area_lon)*cos(pi*quakes$area_lat/180)*pi/180
+    y = (quakes$latitude  - quakes$area_lat)*pi/180
+    d = Rearth * sqrt(x^2 + y^2)
 
+# Arc Approximation
+    Rpole = 6353
+    Requator = 6384
+    Rfat = Requator - Rpole
+    R = Rpole + Rfat*cos( (pi/180)*(quakes$latitude + quakes$area_lat)/2 )
+    arc = sqrt( (quakes$area_lat - quakes$latitude)^2 + (quakes$area_lon - quakes$longitude)^2 )
+    d_arc = 2*pi*R*arc/360
 
 #
 # CURSORY EXPLORATION
@@ -101,7 +113,7 @@
     quakes = quakes[order(quakes$mag, decreasing = TRUE),] # sort by magnitude
 
     print("LARGEST QUAKES")
-    print(quakes[quakes$mag >= 6.0,c("ptime", "mag", "area", "Etnt", "dist")])
+    print(quakes[quakes$mag >= 6.0, c("ptime", "mag", "area", "Etnt", "dist")])
 
 # which major city was most affected by earthquakes?
     print("MEAN distance, magnitude, and Energy in kilotonnes")
@@ -180,3 +192,7 @@
                theme(text = element_text(size = 22))
     print(magVfreq)
     dev.off()
+
+    print(head(quakes$dist))
+    print(head(d))
+    print(head(darc))
