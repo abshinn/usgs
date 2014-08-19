@@ -77,39 +77,32 @@ quakes$Ejoules = 10^(1.5*quakes$mag + 4.8) # units of Joules
 quakes$Etnt = quakes$Ejoules/4.184e9       # units of kilotonnes, TNT
 ```
 
-### Calculate distance from epicenter to city center
+### Calculate approximate distance from epicenter to city center using the [Haversine formula](http://en.wikipedia.org/wiki/Haversine_formula)
 
 ```R
-# calculate distance from center of major city by converting latitude and latitude from polar coordinates
-# to cartesian, and using the distance formula
-Rearth = (6378 + 6356)/2.0 # average polar and equatorial radii for approximate radius, units in km
-latrad = 2*pi*quakes$latitude/360  # units of radians
-lonrad = 2*pi*quakes$longitude/360 # units of radians
-xyz = cbind( Rearth*sin(latrad)*cos(lonrad), # earthquake event cartesian position Nx3 matrix
-             Rearth*sin(latrad)*sin(lonrad), #   units: km
-             Rearth*cos(latrad) )
-SFrad = list("lat" = 2*pi*37.77/360, "lon" = 2*pi*-122.44/360)
-SFxyz = cbind( Rearth*sin(SFrad$lat)*cos(SFrad$lon), # San Francisco cartesian coordinates in 1x3 vector
-               Rearth*sin(SFrad$lat)*sin(SFrad$lon), #   units: km
-               Rearth*cos(SFrad$lat) )
-# prepare SFxyz as Nx3 martix for matrix arithmetic, where N = number of SF events
-SFxyz = matrix(SFxyz, nrow = nrow(quakes[quakes$area == "SF",]), ncol = 3, byrow = TRUE)
-SFdiff = (xyz[quakes$area == "SF",] - SFxyz)
-LArad = list("lat" = 2*pi*34.05/360, "lon" = 2*pi*-118.26/360)
-LAxyz = cbind( Rearth*sin(LArad$lat)*cos(LArad$lon), # Los Angeles cartesian coordinates in 1x3 vector
-               Rearth*sin(LArad$lat)*sin(LArad$lon), #   units: km
-               Rearth*cos(LArad$lat) )
-# prepare LAxyz as Nx3 martix for matrix arithmetic, where N = number of LA events
-LAxyz = matrix(LAxyz, nrow = nrow(quakes[quakes$area == "LA",]), ncol = 3, byrow = TRUE)
-LAdiff = (xyz[quakes$area == "LA",] - LAxyz)
-quakes$dist = NA # initialize distance column in quakes data frame
-quakes$dist[quakes$area == "SF"] = sqrt(apply(SFdiff*SFdiff, 1, sum))
-quakes$dist[quakes$area == "LA"] = sqrt(apply(LAdiff*LAdiff, 1, sum))
+Rearth = 6371 # average earth radius
+
+# approximate city centroids
+quakes$area_lon = 0
+quakes$area_lon[quakes$area == "SF"] = -122.44
+quakes$area_lon[quakes$area == "LA"] = -118.26
+quakes$area_lat = 0
+quakes$area_lat[quakes$area == "SF"] = 37.77
+quakes$area_lat[quakes$area == "LA"] = 34.05
+
+# haversine formula
+lat1 = quakes$area_lat*pi/180
+lat2 = quakes$latitude*pi/180
+dlat = (quakes$area_lat - quakes$latitude)*pi/180
+dlon = (quakes$area_lon - quakes$longitude)*pi/180
+a = sin(dlat/2)*sin(dlat/2) + cos(lat1)*cos(lat2)*sin(dlon/2)*sin(dlon/2)
+c = 2*atan2(sqrt(a), sqrt(1 - a))
+quakes$dist = Rearth*c
 ```
 
-## Questions
+## Ask the data
 
-### What were the largest quakes?
+### What were the largest earthquakes in recent history?
 
 ```R
 quakes = quakes[order(quakes$mag, decreasing = TRUE),] # sort by magnitude
@@ -119,19 +112,20 @@ print(quakes[quakes$mag >= 6.0,c("ptime", "mag", "area", "Etnt", "dist")])
 **Output (with annotation):**
 
 ```R
-                    ptime mag area       Etnt      dist
-10599 1992-06-28 11:57:38 7.3   LA 1344028.02 108.72365 <-- Landers
-7349  1999-10-16 09:46:46 7.2   LA  951498.97 125.37017 <-- Hector Mine
-3705  1989-10-18 00:04:16 6.9   SF  337604.58  86.18342 <-- Loma Prieta
-9184  1994-01-17 12:30:55 6.7   LA  169203.10  22.88980 <-- Northridge
-10587 1992-06-28 15:05:33 6.5   LA   84802.44  93.89301 <-- related to Landers
-4538  1984-04-24 21:15:20 6.1   SF   21301.41  71.59790 <-- Morgan Hill
-10869 1992-04-23 04:50:23 6.1   LA   21301.41 110.10355 <-- Joshua Tree, preceeded Landers
+10599 1992-06-28 11:57:38 7.3   LA 1344028.02 159.76987 <-- Landers
+7349  1999-10-16 09:46:46 7.2   LA  951498.97 175.46360 <-- Hector Mine
+3705  1989-10-18 00:04:16 6.9   SF  337604.58  94.25933 <-- Loma Prieta
+9184  1994-01-17 12:30:55 6.7   LA  169203.10  31.30647 <-- Northridge
+10587 1992-06-28 15:05:33 6.5   LA   84802.44 135.38916 <-- related to Landers
+4538  1984-04-24 21:15:20 6.1   SF   21301.41  82.69884 <-- Morgan Hill
+10869 1992-04-23 04:50:23 6.1   LA   21301.41 162.05213 <-- Joshua Tree, preceeded Landers
 ```
 
-The Landers earthquake had an explosive force of 1.3 megatonnes of TNT, while the Loma Prieta had about 340 kilotonnes of explosive force. Interestingly, the location of these earthquakes are a huge factor to their destructive power, the Landers quake was about 109 km away in the Mojave desert and did not cause nearly as much damage to the LA metro area as the Northridge quake 22 km away, and about 4.0 (10^.6) times less powerful.
+To compare the largest earthquakes in each area, the Landers quake had an explosive force of 1.3 megatonnes of TNT, while the Loma Prieta had about 340 kilotonnes of explosive force. 
 
-### Which city was most affected by earthquakes?
+Since epicenter location is a huge factor in the destructive power of an earthquake, it is interesting to note that the Landers quake was about 160 km away from the densely populated LA metro area, while the Northridge quake was 30 km away, and about 4.0 (10^.6) times less powerful.
+
+### Which major city was most affected by earthquakes?
 
 ```R
 # Mean distance, magnitude, and Energy in TNT
@@ -142,11 +136,11 @@ print(aggregate(data = quakes, cbind(dist, mag, Etnt) ~ area, mean))
 
 ```R
   area     dist      mag      Etnt
-1   LA  96.97176 3.104314 368.69829
-2   SF 103.93985 2.959269  84.71983
+1   LA 126.2884 3.104314 368.69829
+2   SF 111.7245 2.959269  84.71983
 ```
 
-The question of which city has been more affected is more complex than a simple calculation of the 30-year mean of distance and magnitude. However, on average, the earthquakes surrounding LA have been about 10% closer, 1.4 (10^.15) times more severe in magnitude, and with over 4 times more explosive force than Bay Area earthquakes.
+The question of which city has been more affected is more complex than a simple calculation of the 30-year mean of distance and magnitude. However, on average, recent earthquakes surrounding LA have been about 10% closer than Bay Area earthquakes, 1.4 (10^.15) times more severe in magnitude, and with over 4 times more explosive force.
 
 ### What is the combined yearly mean distance, magnitude, and energy?
 
@@ -158,41 +152,40 @@ print(aggregate(data = quakes, cbind(dist, mag, Etnt) ~ yearbins, mean))
 **Output:**
 
 ```R
-    yearbins      dist      mag        Etnt
- 1      1983 110.42223 3.292727    4.506520
- 2      1984  91.83969 3.351741  118.236847
- 3      1985 103.25207 3.106047    7.779889
- 4      1986 104.19157 3.196345   57.913989
- 5      1987  84.14808 3.090076   28.177762
- 6      1988 103.51438 3.134848   14.505230
- 7      1989  89.93265 3.223005  804.548631
- 8      1990  95.09126 3.072021   23.281553
- 9      1991  99.12376 3.020319   24.002774
- 10     1992 114.22599 3.236533  982.619831
- 11     1993 106.61878 2.986907    2.706447
- 12     1994  57.93635 3.157971  168.194017
- 13     1995 121.07506 3.124582   17.246275
- 14     1996 113.05173 3.138735    6.002731
- 15     1997 100.18213 3.156890    6.668820
- 16     1998 101.29559 3.114228    6.726535
- 17     1999 130.72798 3.256908 1310.867030
- 18     2000 122.30836 3.105828    4.814266
- 19     2001 117.22567 3.147203    7.012212
- 20     2002 101.02247 3.076856    4.366177
- 21     2003 104.42577 3.115162    6.349083
- 22     2004 103.80259 3.097368    8.930705
- 23     2005 104.87369 3.138785   13.896986
- 24     2006 107.67465 3.050495    3.925653
- 25     2007 101.79036 3.046964   19.888577
- 26     2008  99.01679 2.963265   12.969126
- 27     2009  83.34869 2.678468    3.110633
- 28     2010  88.89121 2.525352    1.134227
- 29     2011  86.99431 2.606379    1.477807
- 30     2012  90.10570 2.533573    1.094880
+   yearbins      dist      mag        Etnt
+1      1983 126.72346 3.292727    4.506520
+2      1984 109.04522 3.351741  118.236847
+3      1985 119.81664 3.106047    7.779889
+4      1986 123.08929 3.196345   57.913989
+5      1987  97.01694 3.090076   28.177762
+6      1988 117.30689 3.134848   14.505230
+7      1989  99.45154 3.223005  804.548631
+8      1990 109.68262 3.072021   23.281553
+9      1991 113.49903 3.020319   24.002774
+10     1992 156.23963 3.236533  982.619831
+11     1993 135.49608 2.986907    2.706447
+12     1994  70.18247 3.157971  168.194017
+13     1995 138.14896 3.124582   17.246275
+14     1996 129.99745 3.138735    6.002731
+15     1997 115.75065 3.156890    6.668820
+16     1998 117.41048 3.114228    6.726535
+17     1999 172.62893 3.256908 1310.867030
+18     2000 149.68578 3.105828    4.814266
+19     2001 137.13644 3.147203    7.012212
+20     2002 117.39979 3.076856    4.366177
+21     2003 121.76297 3.115162    6.349083
+22     2004 119.03760 3.097368    8.930705
+23     2005 121.67829 3.138785   13.896986
+24     2006 121.59305 3.050495    3.925653
+25     2007 114.70162 3.046964   19.888577
+26     2008 113.91730 2.963265   12.969126
+27     2009  96.35781 2.678468    3.110633
+28     2010 108.41160 2.525352    1.134227
+29     2011 100.28416 2.606379    1.477807
+30     2012 105.47032 2.533573    1.094880
 ```
 
 Due to the exponential nature of the data, the Etnt feature is a clear indicator for seismologically active years. Also, it appears we are seeing increased detection efficiency in the last few years with the average magnitude decreasing.
-
 
 ### What is the magnitude-frequency distribution for the two areas of interest?
 
@@ -225,7 +218,7 @@ print(cbind(freqSF, freqLA))
 
 Note: the units for frequency are in Event Counts per 30 years.
 
-I am not an expert in seismology. However, my guess would be that this magnitude-frequency should theoretically follow a power-law where at one end, as the magnitude approaches zero, the frequency increases exponentially, and at the other end, as the magnitude exceeds 10 the frequency diminishes to almost 0. The fact that the frequency distribution peaks between [3,3.5) and falls off as the magnitude approaches 0, given my uneducated guess, suggests that the detection efficiency (exponentially) decreases as it approaches 0. See plot magVfreq below.
+I am not an expert in seismology. However, my guess would be that this magnitude-frequency should theoretically follow a power-law where at one end, as the magnitude approaches zero, the frequency increases exponentially, and at the other end, as the magnitude exceeds 10 the frequency diminishes to almost 0. The fact that the frequency distribution peaks between [3,3.5) and falls off as the magnitude approaches 0, given my uneducated guess, suggests that the detection efficiency (exponentially) decreases as it approaches 0. See the magnitude versus frequency plot below.
 
 ## Plots
 
