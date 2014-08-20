@@ -41,7 +41,7 @@ LAquakes$area = "LA"
 quakes = rbind(SFquakes, LAquakes)
 ```
 
-### Data scrubbing
+### Data scrubbing and binning
 
 ```R
 # remove columns with all NA values
@@ -77,7 +77,9 @@ quakes$Ejoules = 10^(1.5*quakes$mag + 4.8) # units of Joules
 quakes$Etnt = quakes$Ejoules/4.184e9       # units of kilotonnes, TNT
 ```
 
-### Calculate approximate distance from epicenter to city center using the [Haversine formula](http://en.wikipedia.org/wiki/Haversine_formula)
+### Calculate approximate distance from epicenter to city center
+
+For this calculation I decided to use the [Haversine formula](http://en.wikipedia.org/wiki/Haversine_formula). A great reference to implementing this method and other methods can be found [here](http://www.movable-type.co.uk/scripts/latlong.html).
 
 ```R
 Rearth = 6371 # average earth radius
