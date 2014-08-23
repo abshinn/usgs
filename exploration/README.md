@@ -70,7 +70,7 @@ One way to comprehend the destructive force of earthquakes is to convert from ea
 
 The [Gutenberg and Richter](https://www2.bc.edu/john-ebel/GutenberRichterMagnitude.pdf) energy-magnitude relation (in Joules):
 
-> *E[M] = 10^(1.5\*M + 4.8)*
+> *E[M] = 10^(1.5M + 4.8)*
 
 ```R
 quakes$Ejoules = 10^(1.5*quakes$mag + 4.8) # units of Joules
