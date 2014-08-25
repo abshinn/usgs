@@ -21,8 +21,8 @@
 #    system('./getquakes.py')
 
 # read data into data frame
-SFquakes = read.csv('usgsQuery_SF_83-12.csv', header = TRUE, stringsAsFactors = FALSE)
-LAquakes = read.csv('usgsQuery_LA_83-12.csv', header = TRUE, stringsAsFactors = FALSE)
+SFquakes = read.csv("usgsQuery_SF_84-14.csv", header = TRUE, stringsAsFactors = FALSE)
+LAquakes = read.csv("usgsQuery_LA_84-14.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # create columns containing the name of the area, and combine into one data frame for convenience
 SFquakes$area = "SF"
