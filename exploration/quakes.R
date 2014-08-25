@@ -45,6 +45,9 @@ quakes = quakes[-which(quakes$magType == "mwb"),]
 # create columns with year bins
 quakes$yearbins = strftime(cut(quakes$ptime, "year", right = F), "%Y")
 
+# keep one significant figure after the decimal point for magnitude
+quakes$mag = round(quakes$mag, 1)
+
 # create columns with half and whole magnitude bins
 quakes$Mhalfbins = cut(quakes$mag, seq(2.0,7.5,.5), right = F)
 quakes$Mwholebins = cut(quakes$mag, seq(2.0,8.0,1), right = F)
@@ -123,7 +126,7 @@ library("scales")
 png("SF-LA_timeVmag.png", width = 1000, height = 800)
 timeVmag = ggplot(na.omit(quakes), aes(ptime, mag)) +
            geom_point(aes(size = mag, color = dist)) +
-           ggtitle("SF and LA Earthquakes, 1983-2012") +
+           ggtitle("SF and LA Earthquakes, 1984-2014") +
            xlab("time") +
            ylab("earthquake magnitude") + 
            guides(size = guide_legend(title = "magnitude")) +
@@ -139,7 +142,7 @@ dev.off()
 png("SF-LA_yrVcount.png", width = 1000, height = 800)
 yrVcount = ggplot(na.omit(quakes), aes(yearbins)) +
            geom_bar(aes(fill = Mvariedbins), color = "black") +
-           ggtitle("SF and LA Earthquakes, 1983-2012") +
+           ggtitle("SF and LA Earthquakes, 1984-2014") +
            xlab("year") +
            ylab("event count") + 
            guides(fill = guide_legend(title = "magnitude")) +
@@ -154,17 +157,18 @@ print(yrVcount)
 dev.off()
 
 # magnitude-frequency correlation
-freq = as.data.frame(table(quakes[quakes$mag >= 2.0,c("area","mag")]))
+freq = as.data.frame(table(quakes[quakes$mag >= 2.0, c("area","mag")]))
 freq = freq[order(freq$area),]
+freq$Freq = freq$Freq
 freq[freq$Freq == 0.0,] = NA # bins with zero counts cause log plot issues
 png("SF-LA_magVfreq.png", width = 1000, height = 800)
 magVfreq = ggplot(na.omit(freq), aes(mag, Freq)) +
            geom_point(aes(color = area), size = 4) + 
-           ggtitle("SF and LA Earthquakes, 1983-2012") + 
+           ggtitle("SF and LA Earthquakes, 1984-2014") + 
            ylab("frequency [event count per 31 years]") + 
            scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
                          labels = trans_format("log10", math_format(10^.x))) +
-           scale_x_discrete("magnitude", breaks = seq(2,7.5,.5)) + 
+           scale_x_discrete("magnitude", breaks = seq(2,7,1)) + 
            geom_smooth(method = "loess", aes(group = 1), color = "black") +
            theme_grey(base_size = 12) + 
            theme(text = element_text(size = 22))
