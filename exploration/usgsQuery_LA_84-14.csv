@@ -1,5 +1,8 @@
 time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type
-2014-08-23T17:42:22.240Z,34.2513351,-116.7623367,6.45,2.96,ml,104,29,0.1105,0.19,ci,ci37261000,2014-08-24T03:01:50.199Z,"7km E of Big Bear City, California",earthquake
+2014-08-25T04:08:26.560Z,33.7236667,-118.282,5.78,1.86,ml,22,78,0.01476,0.17,ci,ci37261432,2014-08-25T21:41:54.130Z,"1km SE of San Pedro, California",earthquake
+2014-08-25T02:50:40.560Z,33.6968333,-118.2835,8.15,3.25,ml,90,77,0.01796,0.33,ci,ci37261424,2014-08-25T21:48:01.910Z,"4km S of San Pedro, California",earthquake
+2014-08-23T17:42:22.120Z,34.2531667,-116.7633333,3.22,2.9,ml,110,19,0.1085,0.21,ci,ci37261000,2014-08-25T18:00:45.945Z,"7km E of Big Bear City, California",earthquake
+2014-08-23T06:34:10.900Z,33.9381667,-118.6958333,12.83,1.91,ml,22,150,0.1135,0.13,ci,ci37260936,2014-08-25T19:10:25.160Z,"10km S of Malibu Beach, California",earthquake
 2014-08-22T22:25:09.170Z,33.861,-117.5036667,0.01,1.67,ml,55,68,0.04997,0.17,ci,ci37260880,2014-08-22T23:24:50.170Z,"2km SE of Home Gardens, California",quarry_blast
 2014-08-22T17:39:45.100Z,34.1446667,-117.7516667,4.13,1.58,ml,33,53,0.06996,0.21,ci,ci37260848,2014-08-22T19:51:02.640Z,"5km NNE of La Verne, California",earthquake
 2014-08-22T14:33:25.600Z,33.4825,-116.7613333,8.64,1.82,ml,53,40,0.07934,0.18,ci,ci37260784,2014-08-22T19:24:28.990Z,"10km ENE of Aguanga, California",earthquake
@@ -21,7 +24,7 @@ time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,
 2014-08-19T06:26:07.880Z,34.1913333,-118.7168333,10.85,2.47,ml,86,37,0.05899,0.27,ci,ci37259480,2014-08-21T04:29:48.217Z,"4km ENE of Oak Park, California",earthquake
 2014-08-19T04:04:36.910Z,34.2796667,-117.0318333,8.09,1.63,ml,70,33,0.0316,0.16,ci,ci37259456,2014-08-20T00:43:47.840Z,"10km NE of Running Springs, California",earthquake
 2014-08-18T19:02:55.910Z,33.8455,-117.4905,0.01,1.52,ml,42,54,0.04709,0.18,ci,ci37259320,2014-08-19T21:42:23.470Z,"3km E of El Cerrito, California",quarry_blast
-2014-08-18T18:44:47.800Z,33.8368333,-117.0868333,11.63,2.3,ml,90,20,0.06322,0.17,ci,ci37259312,2014-08-19T21:40:00.210Z,"2km E of Lakeview, California",earthquake
+2014-08-18T18:44:47.800Z,33.8368333,-117.0868333,11.63,2.3,ml,90,20,0.06322,0.17,ci,ci37259312,2014-08-25T08:09:13.702Z,"2km E of Lakeview, California",earthquake
 2014-08-18T11:21:35.450Z,34.2175,-118.675,5.09,2.55,ml,79,31,0.05027,0.38,ci,ci37259176,2014-08-20T13:47:51.814Z,"3km NW of West Hills, California",earthquake
 2014-08-18T10:44:08.120Z,33.3428333,-116.873,10.59,1.56,ml,57,52,0.0138,0.19,ci,ci37259168,2014-08-19T19:51:39.610Z,"11km S of Aguanga, California",earthquake
 2014-08-18T04:55:56.780Z,34.3303333,-116.8301667,7.56,3.67,ml,126,21,0.01778,0.16,ci,ci37259096,2014-08-19T04:57:00.002Z,"7km N of Big Bear City, California",earthquake
@@ -162,7 +165,7 @@ time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,
 2014-07-14T23:12:22.060Z,34.2718333,-117.017,8.79,1.54,ml,53,58,0.01774,0.12,ci,ci15526761,2014-07-15T19:35:47.420Z,"10km WNW of Big Bear Lake, California",earthquake
 2014-07-14T14:34:14.870Z,33.953,-118.311,7.69,1.6,ml,13,265,0.05637,0.22,ci,ci15526545,2014-07-15T17:45:50.200Z,"1km NNW of Westmont, California",earthquake
 2014-07-14T12:20:50.020Z,34.0426667,-117.5696667,9.11,1.89,ml,78,24,0.03855,0.19,ci,ci15526497,2014-07-15T17:08:01.680Z,"7km SSE of Rancho Cucamonga, California",earthquake
-2014-07-14T10:49:10.670Z,35.349,-117.7786667,2.59,2.65,ml,50,34,0.1523,0.13,ci,ci15526481,2014-07-16T15:41:12.690Z,"48km N of Searles Valley, California",earthquake
+2014-07-14T10:49:10.670Z,35.349,-117.7786667,2.59,2.65,ml,50,34,0.1523,0.13,ci,ci15526481,2014-08-25T12:46:29.841Z,"31km SSW of Ridgecrest, California",earthquake
 2014-07-14T06:57:31.000Z,34.5196667,-116.2745,2.43,1.51,ml,27,58,0.1919,0.09,ci,ci15526433,2014-07-15T16:20:12.780Z,"42km N of Joshua Tree, California",earthquake
 2014-07-13T23:35:25.560Z,33.141,-116.5008333,10.41,2.01,ml,49,36,0.1009,0.18,ci,ci15526337,2014-07-15T15:47:45.300Z,"11km NE of Julian, California",earthquake
 2014-07-13T21:47:25.660Z,33.4966667,-116.5048333,14.36,2.82,ml,96,25,0.06449,0.18,ci,ci15526321,2014-07-15T15:40:48.391Z,"16km ESE of Anza, California",earthquake
@@ -826,7 +829,7 @@ time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,
 2014-03-29T04:13:54.140Z,33.9256667,-117.9255,3.3,2.04,ml,17,131,0.01973,0.07,ci,ci15481689,2014-03-31T16:20:48.980Z,"2km ESE of La Habra, California",earthquake
 2014-03-29T04:12:18.480Z,33.9553333,-117.8911667,1.77,2.5,ml,18,191,0.02882,0.27,ci,ci37183333,2014-03-31T16:57:37.499Z,"2km SSE of Rowland Heights, California",earthquake
 2014-03-29T04:11:53.750Z,33.92,-117.9316667,2.18,3.2,ml,65,27,0.02617,0.2,ci,ci15481681,2014-05-29T23:32:07.000Z,"1km SE of La Habra, California",earthquake
-2014-03-29T04:09:42.310Z,33.9325,-117.9171667,4.77,5.1,mw,170,19,0.01396,0.2,ci,ci15481673,2014-08-04T16:17:34.877Z,"2km E of La Habra, California",earthquake
+2014-03-29T04:09:42.310Z,33.9325,-117.9171667,4.77,5.1,mw,170,19,0.01396,0.2,ci,ci15481673,2014-08-25T18:56:09.000Z,"2km E of La Habra, California",earthquake
 2014-03-29T04:08:56.080Z,34.2188333,-117.5548333,10.14,1.7,ml,33,30,0.04655,0.1,ci,ci15481665,2014-04-01T20:38:50.945Z,"11km NE of San Antonio Heights, California",earthquake
 2014-03-29T03:16:47.530Z,33.9271667,-117.9188333,3.85,2.07,ml,73,30,0.01863,0.34,ci,ci15481657,2014-04-01T20:32:25.900Z,"2km ESE of La Habra, California",earthquake
 2014-03-29T03:03:39.790Z,33.9253333,-117.9341667,7.46,3.57,ml,147,18,0.01688,0.29,ci,ci15481633,2014-05-29T23:32:07.000Z,"1km SE of La Habra, California",earthquake
@@ -2059,7 +2062,7 @@ time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,
 2013-05-29T16:14:05.200Z,35.4648,-119.3527,5.6,2,Ml,15,140.4,0.23356197,0.4,ci,ci15350793,2013-05-30T17:14:37.336Z,"8km WSW of Shafter, California",earthquake
 2013-05-29T15:38:40.700Z,34.4132,-119.949,10.3,2.6,Ml,31,108,0.08983153,0.33,ci,ci15350769,2014-03-21T04:02:02.174Z,"8km W of Isla Vista, California",earthquake
 2013-05-29T14:50:02.900Z,34.433,-119.9268,9.5,2.6,Ml,30,64.8,0.07186522,0.31,ci,ci15350737,2014-03-21T04:05:09.324Z,"6km WNW of Isla Vista, California",earthquake
-2013-05-29T14:38:03.200Z,34.4125,-119.926,8,4.8,Mw,31,64.8,0.07186522,0.2,ci,ci15350729,2014-03-21T03:16:02.310Z,"5km W of Isla Vista, California",earthquake
+2013-05-29T14:38:03.200Z,34.4125,-119.926,8,4.8,Mw,31,64.8,0.07186522,0.2,ci,ci15350729,2014-08-25T18:48:16.000Z,"5km W of Isla Vista, California",earthquake
 2013-05-29T05:33:32.700Z,34.0285,-117.2385,17.6,1.6,Ml,64,50.4,0.08084838,0.13,ci,ci15350569,2013-05-30T19:12:46.284Z,"3km SE of Loma Linda, California",earthquake
 2013-05-29T03:59:52.100Z,34.2602,-118.6813,8.5,1.7,Ml,26,79.2,0.01796631,0.27,ci,ci15350529,2013-05-30T18:28:45.873Z,"2km ESE of Santa Susana, California",earthquake
 2013-05-28T23:25:02.200Z,35.0422,-117.6703,0,1.5,Ml,13,72,0.10779783,0.13,ci,ci15350417,2013-05-29T23:46:37.617Z,"1km NNE of Quarry at BORON",quarry
@@ -9757,3 +9760,58 @@ time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,
 1984-09-06T10:04:33.500Z,34,-117.03,6,3,ml,,,,,pde,pde19840906100433500_6,2013-03-16T00:10:06.593Z,"Southern California",earthquake
 1984-08-27T07:53:14.600Z,32.7,-118.18,6,3.3,ml,,,,,pde,pde19840827075314600_6,2013-03-16T00:09:56.884Z,"Channel Islands region, California",earthquake
 1984-08-25T19:12:38.000Z,32.76,-118.16,6,3.3,ml,,,,,pde,pde19840825191238000_6,2013-03-16T00:09:56.339Z,"Channel Islands region, California",earthquake
+1984-08-06T08:14:36.500Z,33.98,-116.71,14,4,mb,,,,,pde,pde19840806081436500_14,2013-03-16T00:09:49.623Z,"Southern California",earthquake
+1984-08-05T15:38:18.500Z,34.41,-118.44,6,2.1,ml,,,,,pde,pde19840805153818500_6,2013-03-16T00:09:49.382Z,"Greater Los Angeles area, California",earthquake
+1984-08-05T15:28:55.000Z,34.41,-118.44,6,3,ml,,,,,pde,pde19840805152855000_6,2013-03-16T00:09:49.380Z,"Greater Los Angeles area, California",earthquake
+1984-08-05T09:38:51.200Z,34.41,-118.45,6,3.2,ml,,,,,pde,pde19840805093851200_6,2013-03-16T00:09:49.355Z,"Greater Los Angeles area, California",earthquake
+1984-07-27T19:42:07.700Z,34.26,-116.15,6,3.5,ml,,,,,pde,pde19840727194207700_6,2013-03-16T00:09:41.059Z,"Southern California",earthquake
+1984-07-25T18:43:23.000Z,34.05,-116.73,3,3.4,ml,,,,,pde,pde19840725184323000_3,2013-03-16T00:09:40.230Z,"Southern California",earthquake
+1984-07-12T12:17:42.200Z,33.47,-116.4,10,3.2,ml,,,,,pde,pde19840712121742200_10,2013-03-16T00:09:34.484Z,"Southern California",earthquake
+1984-07-09T19:31:36.500Z,33.53,-116.8,0,3,ml,,,,,pde,pde19840709193136500_0,2013-03-16T00:09:33.240Z,"Southern California",earthquake
+1984-07-09T19:20:15.800Z,33.53,-116.8,6,3.2,ml,,,,,pde,pde19840709192015800_6,2013-03-16T00:09:33.187Z,"Southern California",earthquake
+1984-07-09T19:09:29.300Z,33.54,-116.8,0,3.2,ml,,,,,pde,pde19840709190929300_0,2013-03-16T00:09:33.185Z,"Southern California",earthquake
+1984-07-08T11:41:17.800Z,33.7,-118.06,6,3,ml,,,,,pde,pde19840708114117800_6,2013-03-16T00:09:32.238Z,"San Pedro Channel, California",earthquake
+1984-07-06T22:14:14.000Z,35.73,-118.05,7,4.1,ml,,,,,pde,pde19840706221414000_7,2013-03-16T00:09:31.713Z,"Central California",earthquake
+1984-07-06T12:00:12.700Z,35.73,-118.05,8,4.3,ml,,,,,pde,pde19840706120012700_8,2013-03-16T00:09:31.580Z,"Central California",earthquake
+1984-07-04T13:00:50.200Z,33.96,-117.2,13,3.2,ml,,,,,pde,pde19840704130050200_13,2013-03-16T00:09:30.798Z,"Greater Los Angeles area, California",earthquake
+1984-07-02T21:08:08.300Z,34.31,-116.48,2,3.2,ml,,,,,pde,pde19840702210808300_2,2013-03-16T00:09:29.800Z,"Southern California",earthquake
+1984-07-02T19:16:55.100Z,32.46,-118.05,6,3.5,ml,,,,,pde,pde19840702191655100_6,2013-03-16T00:09:29.771Z,"offshore Baja California, Mexico",earthquake
+1984-06-30T06:34:14.500Z,34.38,-116.61,2,3.4,ml,,,,,pde,pde19840630063414500_2,2013-03-16T00:09:25.064Z,"Southern California",earthquake
+1984-06-24T21:57:29.900Z,33.96,-116.34,6,3.5,ml,,,,,pde,pde19840624215729900_6,2013-03-16T00:09:23.295Z,"Southern California",earthquake
+1984-06-12T00:27:52.300Z,34.54,-118.99,12,4.2,ml,,,,,pde,pde19840612002752300_12,2013-03-16T00:09:19.197Z,"Southern California",earthquake
+1984-06-11T22:21:10.400Z,34.38,-116.61,2,4,ml,,,,,pde,pde19840611222110400_2,2013-03-16T00:09:19.073Z,"Southern California",earthquake
+1984-06-10T20:19:07.400Z,33.82,-116.18,6,3.1,ml,,,,,pde,pde19840610201907400_6,2013-03-16T00:09:18.418Z,"Southern California",earthquake
+1984-05-11T04:26:14.400Z,34.01,-118.18,13,2.7,ml,,,,,pde,pde19840511042614400_13,2013-03-16T00:09:03.945Z,"Greater Los Angeles area, California",earthquake
+1984-05-08T22:16:44.100Z,33.56,-118.23,6,3.2,ml,,,,,pde,pde19840508221644100_6,2013-03-16T00:09:03.291Z,"San Pedro Channel, California",earthquake
+1984-05-07T19:32:32.700Z,34.66,-119.97,10,4.4,mb,,,,,pde,pde19840507193232700_10,2013-03-16T00:09:02.733Z,"Southern California",earthquake
+1984-05-03T09:47:45.000Z,34.33,-116.4,3,3.3,ml,,,,,pde,pde19840503094745000_3,2013-03-16T00:08:59.858Z,"Southern California",earthquake
+1984-04-29T16:56:29.800Z,33.87,-116.54,11,2.8,ml,,,,,pde,pde19840429165629800_11,2013-03-16T00:08:55.928Z,"Southern California",earthquake
+1984-04-25T07:20:43.500Z,34.25,-119.64,12,3.5,ml,,,,,pde,pde19840425072043500_12,2013-03-16T00:08:54.050Z,"Santa Barbara Channel, California",earthquake
+1984-04-22T05:53:28.800Z,34.24,-119.6,14,3.7,ml,,,,,pde,pde19840422055328800_14,2013-03-16T00:08:51.608Z,"Santa Barbara Channel, California",earthquake
+1984-04-21T23:02:18.780Z,34.131,-119.655,10,3.2,ml,,,,0.7,pde,pde19840421230218780_10,2013-03-16T00:08:51.348Z,"Santa Barbara Channel, California",earthquake
+1984-04-21T22:23:15.100Z,34.25,-119.62,12,3.4,ml,,,,,pde,pde19840421222315100_12,2013-03-16T00:08:51.346Z,"Santa Barbara Channel, California",earthquake
+1984-04-21T11:58:43.100Z,33.64,-117.94,6,3,ml,,,,,pde,pde19840421115843100_6,2013-03-16T00:08:51.146Z,"Greater Los Angeles area, California",earthquake
+1984-04-20T10:08:41.200Z,33.93,-117.88,9,2.5,ml,,,,,pde,pde19840420100841200_9,2013-03-16T00:08:50.928Z,"Greater Los Angeles area, California",earthquake
+1984-04-18T13:19:02.700Z,33.66,-118.36,3,3.1,ml,,,,,pde,pde19840418131902700_3,2013-03-16T00:08:49.665Z,"San Pedro Channel, California",earthquake
+1984-04-03T06:26:39.700Z,33.87,-118.24,6,2.6,ml,,,,,pde,pde19840403062639700_6,2013-03-16T00:08:42.469Z,"Greater Los Angeles area, California",earthquake
+1984-03-28T17:36:20.200Z,33.97,-117.23,13,2.5,ml,,,,,pde,pde19840328173620200_13,2013-03-16T00:08:37.830Z,"Greater Los Angeles area, California",earthquake
+1984-03-21T23:52:03.300Z,33.67,-118.39,2,2.8,ml,,,,,pde,pde19840321235203300_2,2013-03-16T00:08:34.930Z,"San Pedro Channel, California",earthquake
+1984-03-16T19:53:21.200Z,33.7,-116.74,19,3,ml,,,,,pde,pde19840316195321200_19,2013-03-16T00:08:31.492Z,"Southern California",earthquake
+1984-03-12T10:17:51.000Z,34.91,-119.02,13,3.5,ml,,,,,pde,pde19840312101751000_13,2013-03-16T00:08:30.298Z,"Central California",earthquake
+1984-03-07T20:26:35.000Z,33.59,-118.36,8,2.1,ml,,,,,pde,pde19840307202635000_8,2013-03-16T00:08:28.699Z,"San Pedro Channel, California",earthquake
+1984-03-06T02:41:35.000Z,34.18,-117.31,2,2.5,ml,,,,,pde,pde19840306024135000_2,2013-03-16T00:08:27.854Z,"Greater Los Angeles area, California",earthquake
+1984-02-28T06:08:59.200Z,34.4,-116.83,8,3.4,ml,,,,,pde,pde19840228060859200_8,2013-03-16T00:08:20.348Z,"Southern California",earthquake
+1984-02-27T10:18:15.000Z,33.47,-118.06,6,3.9,ml,,,,,pde,pde19840227101815000_6,2013-03-16T00:08:19.821Z,"Gulf of Santa Catalina, California",earthquake
+1984-02-23T17:34:23.200Z,33.89,-116.15,5,3.7,ml,,,,,pde,pde19840223173423200_5,2013-03-16T00:08:18.026Z,"Southern California",earthquake
+1984-02-11T14:25:14.500Z,34.54,-118.91,18,3,ml,,,,,pde,pde19840211142514500_18,2013-03-16T00:08:11.188Z,"Southern California",earthquake
+1984-02-07T07:52:36.200Z,33.86,-120.31,6,3,ml,,,,,pde,pde19840207075236200_6,2013-03-16T00:08:09.138Z,"Channel Islands region, California",earthquake
+1984-02-07T03:33:30.200Z,34.31,-119.27,0,3.2,ml,,,,,pde,pde19840207033330200_0,2013-03-16T00:08:09.083Z,"Greater Los Angeles area, California",earthquake
+1984-02-05T20:39:45.500Z,34.54,-118.91,16,3.2,ml,,,,,pde,pde19840205203945500_16,2013-03-16T00:08:08.110Z,"Southern California",earthquake
+1984-02-02T21:47:56.500Z,33.89,-116.85,17,3.3,ml,,,,,pde,pde19840202214756500_17,2013-03-16T00:08:06.581Z,"Southern California",earthquake
+1984-02-01T06:39:33.300Z,33.53,-116.8,0,3.1,ml,,,,,pde,pde19840201063933300_0,2013-03-16T00:08:05.389Z,"Southern California",earthquake
+1984-01-29T20:19:45.900Z,33.71,-118.06,6,2.7,ml,,,,,pde,pde19840129201945900_6,2013-03-16T00:08:03.227Z,"Greater Los Angeles area, California",earthquake
+1984-01-29T20:06:25.400Z,33.72,-118.08,6,2.7,ml,,,,,pde,pde19840129200625400_6,2013-03-16T00:08:03.223Z,"San Pedro Channel, California",earthquake
+1984-01-25T05:26:27.600Z,33.89,-116.14,2,3,ml,,,,,pde,pde19840125052627600_2,2013-03-16T00:08:01.928Z,"Southern California",earthquake
+1984-01-23T17:03:16.000Z,33.97,-116.84,15,2.7,ml,,,,,pde,pde19840123170316000_15,2013-03-16T00:08:01.579Z,"Southern California",earthquake
+1984-01-15T17:54:20.200Z,34.33,-116.46,2,3.1,ml,,,,,pde,pde19840115175420200_2,2013-03-16T00:07:58.722Z,"Southern California",earthquake
+1984-01-13T09:41:41.200Z,34.05,-117.25,15,3.2,ml,,,,,pde,pde19840113094141200_15,2013-03-16T00:07:57.774Z,"Greater Los Angeles area, California",earthquake
