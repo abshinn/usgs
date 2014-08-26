@@ -8,8 +8,8 @@ if __name__ == "__main__":
 
     import usgs
 
-    # obtain data for the greater San Francisco area, 1983 through 2012
-    usgs.APIquery(starttime = "1984-08-25", endtime = "2014-08-25T02:17:26",
+    # obtain data for the greater San Francisco area, start of 1984 through August 24, 2014 in PST
+    usgs.APIquery(starttime = "1984-01-01T07:00:00", endtime = "2014-08-25T07:00:00",
                   minmagnitude = "1.5",
                   latitude = "37.77", longitude = "-122.44",
                   minradiuskm = "0", maxradiuskm = "200",
@@ -17,8 +17,8 @@ if __name__ == "__main__":
                   filename = "usgsQuery_SF_84-14.csv",
                   format = "csv")
 
-    # obtain data for the greater Los Angeles area, 1983 through 2012
-    usgs.APIquery(starttime = "1984-08-25", endtime = "2014-08-25T02:17:26",
+    # obtain data for the greater Los Angeles area, start of 1984 through August 24, 2014 in PST
+    usgs.APIquery(starttime = "1984-01-01T07:00:00", endtime = "2014-08-25T07:00:00",
                   minmagnitude = "1.5",
                   latitude = "34.05", longitude = "-118.26",
                   minradiuskm = "0", maxradiuskm = "200",
