@@ -1,9 +1,9 @@
 usgs
 ====
 
-USGS earthquake API python3 wrapper
+## USGS Earthquake API python3 wrapper
 
-### Usage
+#### Usage
 
 To obtain earthquake events surrounding San Francisco (within 200 km) since 2013, minimum magnitude of 2.5, in geojson format:
 
@@ -17,11 +17,12 @@ usgs.APIquery(starttime = "2013-01-01", endtime = "",
               format = "geojson")
 ```
 
-### USGS Earthquake Data Exploration
+## USGS Earthquake Data Exploration
 
 - See [exploration](https://github.com/abshinn/usgs/tree/master/exploration) for an example of USGS data exploration with R. 
+- Results from the exploration are discussed [here](http://abshinn.github.io/r/2014/08/18/R-and-Quakes/) on [abshinn.github.io](http://abshinn.github.io).
 
-### Quakes Shell Command
+## quakes Shell Command
 
 Also within this repository is a shell script which uses curl to pull down the latest earthquakes from USGS's earthquake feed.
 
@@ -49,7 +50,7 @@ time                      latitude  longitude  depth  mag  place
 2014-09-01T16:47:32.000Z  50.5447   -174.485   25.6   2.7  "184km S of Atka - Alaska"
 ```
 
-Or, to see what earthquakes have occurred in California in the past day: 
+Or, to see earthquake events that have occurred in California in the past 24 hours: 
 
 ```bash
 $ quakes | grep California
