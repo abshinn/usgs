@@ -19,7 +19,7 @@ done
 
 if $helpmsg; then
     echo NAME
-    echo      quakes -- use curl to call usgs earthquake feed
+    echo 'quakes -- use curl to call usgs earthquake (greater than 2.5M) feed'
     echo
     echo OPTIONS
     echo      -h    display this help message
